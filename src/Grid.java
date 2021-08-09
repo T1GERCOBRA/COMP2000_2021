@@ -8,7 +8,7 @@ public class Grid {
    int y=0;
    for(int i =0;i<h;i+=1){
        x=18;
-       y=y+3;
+       y=y+36;
     for(int j =0;j<w;j+=1){
        cells[i][j] = new Cell(x,y);
     }
