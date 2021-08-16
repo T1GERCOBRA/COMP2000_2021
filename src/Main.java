@@ -3,36 +3,42 @@ import javax.swing.JPanel;
 
 import java.awt.*;
 
-public class Main extends JFrame {
-    public static void main(String[] args) throws Exception {
-        //System.out.println("Red vs. Blue");
-        Main window = new Main();
-        
-        
-        
+class Main extends JFrame {
+
+    class App extends JPanel {
+
+        Grid grid;
+
+        public App() {
+            setPreferredSize(new Dimension(720, 720));
+            grid = new Grid();
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            grid.paint(g, getMousePosition());
+        }
+
     }
-    public Main(){
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("Red vs. Blue");
+        Main window = new Main();
+        window.run();
+    }
+
+    private Main() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Canvas canvas = new Canvas();
+        App canvas = new App();
         this.setContentPane(canvas);
-        grid = new Grid(20,20);
         this.pack();
         this.setVisible(true);
-        
     }
-    
-    public class Canvas extends JPanel{
-        public Canvas(){
-            setPreferredSize(new Dimension(720,720));
+
+    public void run() {
+        while (true) {
+            this.repaint();
         }
-       
-        public void paint(Graphics p){
-          grid.paint(p);
     }
-   
 }
-
-Grid grid;
-
-    
-}
+ 

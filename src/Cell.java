@@ -1,20 +1,35 @@
 import javax.swing.JPanel;
 import java.awt.*;
 
-public class Cell extends JPanel {
-    public Cell(int x, int y){
-        x=a;
-        y=b;
-        
-    }
-    public void paintComponent(Graphics g){
-        
-             g.setColor(Color.WHITE);
-             g.fillRect(a,b,35,35);
-             g.setColor(Color.BLACK);
-             g.drawRect(a,b,35,35);
-   
+class Cell extends Actor{
+    // fields
+    int x;
+    int y;
+    static int size = 35;
 
+    //constructors
+    public Cell(int x, int y){
+        this.x = x;
+        this.y = y;
     }
-    int a,b;
-}
+
+    //methods
+    public void paint(Graphics g, Point mousePos){
+        if(contains(mousePos)){
+            g.setColor(Color.GRAY);
+        } else {
+            g.setColor(Color.WHITE);
+        }
+        g.fillRect(x,y,size,size);
+        g.setColor(Color.BLACK);
+        g.drawRect(x,y,size,size);
+    }
+
+    boolean contains(Point p){
+        if (p != null){
+            return (x < p.x && x+size > p.x && y < p.y && y+size > p.y);
+        } else {
+            return false;
+        }
+    }
+} 

@@ -1,30 +1,24 @@
 import java.awt.*;
-public class Grid {
-  public Grid(int h, int w){
-   cells = new Cell[h][w];
-   xCells = h;
-   yCells = w;
-   int x=0;
-   int y=0;
-   for(int i =0;i<h;i+=1){
-       x=18;
-       y=y+36;
-    for(int j =0;j<w;j+=1){
-       cells[i][j] = new Cell(x,y);
-    }
-   }
-   }
+class Grid extends Stage  {
+  //fields
+  Cell[][] cells = new Cell[20][20];
 
-   public void paint(Graphics p){
-    for(int i =0;i<yCells;i+=1){
-        for(int j =0;j<xCells;j+=1){
-         cells[j][i].paint(p);
-     }
-    }
-   
-}
-     int xCells, yCells;
-     Cell [][] cells;
+  // constructor
+  public Grid(){
+      for(int i = 0; i < cells.length; i++){
+          for(int j = 0; j < cells[i].length; j++){
+              cells[i][j] = new Cell(10+35*i,10+35*j);
+          }
+      }
+  }
 
-       }
+  // methods
+  public void paint(Graphics g, Point mousePos){
+      for(int i = 0; i < cells.length; i++){
+          for(int j = 0; j < cells[i].length; j++){
+              cells[i][j].paint(g, mousePos);
+          }
+      }
+  }
+} 
 
