@@ -1,19 +1,18 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import java.awt.*;
-
 class Main extends JFrame {
-
+    
     class App extends JPanel {
-
-        Grid grid;
+        
         Stage stage;
 
         public App() {
-            setPreferredSize(new Dimension(720, 720));
-            grid = new Grid();
+            setPreferredSize(new Dimension(1024, 720));
             stage = new Stage();
+            stage = StageReader.readStage("data/stage1.rvb");
         }
 
         @Override
@@ -24,7 +23,6 @@ class Main extends JFrame {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Red vs. Blue");
         Main window = new Main();
         window.run();
     }
@@ -43,4 +41,3 @@ class Main extends JFrame {
         }
     }
 }
- 
