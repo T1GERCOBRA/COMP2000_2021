@@ -23,6 +23,8 @@ public class Mountain extends Cell {
           color = new Color(255,255,180);
 
         }
+
+        type = "Mountain";
         
         
     }

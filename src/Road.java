@@ -22,6 +22,7 @@ public class Road extends Cell {
           color = new Color(186, 186, 186);
 
         }
+        type = "Road";
         
         
     }

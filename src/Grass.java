@@ -10,6 +10,7 @@ public class Grass extends Cell {
   int rand2 = (int)(Math.random() * range) + min;
   public Grass(int x, int y) {
         super(x, y);
+        type = "Grass";
         rand = (int)(Math.random() * range) + min;
         elevation = rand;
         if(elevation>=0 && elevation<=50){

@@ -23,7 +23,7 @@ public class Water extends Cell {
 
         }
         
-        
+        type = "Water";
     }
    
    

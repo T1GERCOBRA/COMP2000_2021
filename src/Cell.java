@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.Optional;
 
 class Cell extends Rectangle {
     static int size = 35;
@@ -10,6 +11,7 @@ class Cell extends Rectangle {
     int row;
     Color color;
     int elevation;
+    String type;
 
     Mountain mountain;
     List <Cell> landscapes;
