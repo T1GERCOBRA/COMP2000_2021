@@ -28,11 +28,7 @@ class StageReader {
             System.out.println(cellsInQuestion);
             for (Cell c : cellsInQuestion) {
                 System.out.println(c);
-                if (value.equals("train")) {
-                    stage.actors.add(new Train(c));
-                } else if (value.equals("car")) {
-                    stage.actors.add(new Car(c));
-                } else if (value.equals("boat")) {
+                 if (value.equals("boat")) {
                     stage.actors.add(new Boat(c));
                 }
             }

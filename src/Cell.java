@@ -2,27 +2,28 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.List;
 
 class Cell extends Rectangle {
     static int size = 35;
     char col;
     int row;
+    Color color;
+    int elevation;
 
-    public Cell(char inCol, int inRow, int inX, int inY) {
-        super(inX, inY, size, size);
-        col = inCol;
-        row = inRow;
+    Mountain mountain;
+    List <Cell> landscapes;
+    
+    public Cell(int x ,int y) {
+        super(x, y, size, size);
     }
 
     void paint(Graphics g, Point mousePos) {
-        if(contains(mousePos)) {
-            g.setColor(Color.GRAY);
-        } else {
-            g.setColor(Color.WHITE);
-        }
+        g.setColor(color); 
         g.fillRect(x,y,size,size);
         g.setColor(Color.BLACK);
         g.drawRect(x,y,size,size);
+        //System.out.println();
     }
 
     @Override

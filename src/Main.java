@@ -10,11 +10,12 @@ class Main extends JFrame {
     class App extends JPanel {
         
         Stage stage;
+        
 
         public App() throws IOException {
             setPreferredSize(new Dimension(1024, 720));
             stage = new Stage();
-            stage = StageReader.readStage("data/stage1.rvb");
+           
         }
 
         @Override
@@ -27,6 +28,7 @@ class Main extends JFrame {
     public static void main(String[] args) throws Exception {
         Main window = new Main();
         window.run();
+        
     }
 
     private Main() throws IOException {
