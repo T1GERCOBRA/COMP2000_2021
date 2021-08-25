@@ -1,25 +1,9 @@
-<<<<<<< HEAD
-import java.awt.*;
 
-class Grid {
-    //fields
-    Cell[][] cells = new Cell[20][20];
-    // constructor
-    public Grid(){
-        for(int i = 0; i < cells.length; i++){
-            for(int j = 0; j < cells[i].length; j++){
-                cells[i][j] = new Cell(10+35*i,10+35*j);
-            }
-        }
-    }
-    // methods
-    public void paint(Graphics g, Point mousePos){
-        for(int i = 0; i < cells.length; i++){
-            for(int j = 0; j < cells[i].length; j++){
-=======
+
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 class Grid {
     Cell[][] cells = new Cell[20][20];
@@ -41,20 +25,31 @@ class Grid {
     }
 
     public void paint(Graphics g, Point mousePos) {
+        // for(int i = 0; i < cells.length; i++) {
+        //     for(int j = 0; j < cells[i].length; j++) { 
+
+        //         cells[i][j].paint(g, mousePos);
+        //     }
+        // }
+
+        doToEachCell(c->
+        
+        {c.paint(g, mousePos);
+        
+        });
+
+        }
+    
+
+    public void doToEachCell(Consumer<Cell> func) {
         for(int i = 0; i < cells.length; i++) {
             for(int j = 0; j < cells[i].length; j++) { 
->>>>>>> 5b502f28322cb25ccc5e01d6c2d9500aefe5dae6
-                cells[i][j].paint(g, mousePos);
+
+                func.accept(cells[i][j]);
             }
         }
-    }
+      }
 
-<<<<<<< HEAD
-    public Cell cellAtColRow(int c, int r) {
-        return cells[c][r];
-    }
-} 
-=======
     private Optional<Cell> cellAtColRow(int c, int r) {
         if(c >= 0 && c < cells.length && r >= 0 && r < cells[c].length) {
             return Optional.of(cells[c][r]);
@@ -77,4 +72,4 @@ class Grid {
         return Optional.empty();
     }
 }
->>>>>>> 5b502f28322cb25ccc5e01d6c2d9500aefe5dae6
+

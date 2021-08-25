@@ -1,5 +1,7 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,8 +13,13 @@ class Main extends JFrame {
 
         public App() {
             setPreferredSize(new Dimension(1024, 720));
-            stage = new Stage();
-            stage = StageReader.readStage("data/stage1.rvb");
+         
+            try {
+                stage = StageReader.readStage("data/stage1.rvb");
+            } catch (IOException e) {
+                
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -27,7 +34,7 @@ class Main extends JFrame {
         window.run();
     }
 
-    private Main() {
+    private Main()  {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         App canvas = new App();
         this.setContentPane(canvas);
@@ -38,6 +45,15 @@ class Main extends JFrame {
     public void run() {
         while (true) {
             this.repaint();
+            try{
+            
+            Thread.sleep(20);
+         
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+
+            }
         }
     }
 }
