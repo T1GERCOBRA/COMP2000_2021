@@ -1,10 +1,10 @@
+//Thien Tran   ID: 45911355
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 class Main extends JFrame {
     
     class App extends JPanel {
