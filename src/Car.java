@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Car extends Actor {
     public Car(Cell inLoc, float inRedness) {
-        loc = inLoc;
+        setLocation(inLoc);
         color = new Color(148, 33, 146); // or we could use Color.MAGENTA
         color = Color.MAGENTA;
         redness = inRedness;

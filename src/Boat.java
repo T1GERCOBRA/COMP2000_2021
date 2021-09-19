@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Boat extends Actor {
     public Boat(Cell inLoc, float inRedness) {
-        loc = inLoc;
+        setLocation(inLoc);
         color = Color.ORANGE;
         redness = inRedness;
         turns = 1;

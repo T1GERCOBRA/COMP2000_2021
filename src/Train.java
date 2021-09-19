@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Train extends Actor {
     public Train(Cell inLoc, float inRedness) {
-        loc = inLoc;
+        setLocation(inLoc);
         color = Color.RED;
         redness = inRedness;
         turns = 1;

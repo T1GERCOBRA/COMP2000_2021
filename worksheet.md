@@ -241,3 +241,17 @@ Notice that the computer move is random every time.  The AI (such as it is) asks
 # Task 18
 
 We are going to build some (very rudimentary) strategy into this turn-based strategy game.  At the moment, all the actors on team blue will just move randomly.  Instead, we want their strategy to be determined by _which row they are on_.  If they are on an even-numbered then they should move randomly, but if they are on an odd-numbered row they should _always move to the left-most possible location_.  Note:  if it is not clear yet, you need the strategy pattern so implement this.  Why is is the right pattern for this task?
+
+# Task 19
+
+Head office have demanded that all iteration be done with the ["enhanced for loop" - aka the "for each" loop](https://blogs.oracle.com/corejavatechtips/using-enhanced-for-loops-with-your-classes).  You don't mind, this is a sensible-enough plan.
+
+You go on a hunt for loops that might need changing.  First you find the nested for-loops in the `Grid` constructor but head-office allow old-style loops for building arrays.  However, there are _two_ other places in `Grid.java` where forbidden-looping techqniques are used.  The team has a discussion and decides the best solution is to add an iterator to `Grid` so that the enhanced for loop can be used.
+
+Your job is to create such an iterator.  It must iterate over every cell in the grid, but the order it does so does not matter.  Then you should use that iterator to replace all the forbidden loops in `Grid`.
+
+# 🤔 Task 20
+
+Your boss has suggested the following new gameplay:  When one character moves on top of another, they become "stuck" to each other.  Their `redness` is the average of each `redness` and their `moves` is the minimum of each `moves`.  That "double-character" could then move onto another character to make a "triple-character", etc.  Your boss also thinks that the composite pattern is the way to implement this.
+
+The composite pattern can be quite variable, and it is easy to stray from it in situations where you think it might be useful.  Come up with a design for the above suggestion that _is as close as possible to the composite pattern_.  Explain where it differs and whether you think that matters.  Is your solution a valid composite?

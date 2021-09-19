@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,12 +29,7 @@ class Grid {
     }
 
     public void paint(Graphics g, Point mousePos) {
-        // for(int i = 0; i < cells.length; i++) {
-        //     for(int j = 0; j < cells[i].length; j++) { 
 
-        //         cells[i][j].paint(g, mousePos);
-        //     }
-        // }
 
         doToEachCell(c->
         
@@ -73,12 +69,20 @@ class Grid {
      * @param func The `Cell` to `void` function to apply at each spot.
      */
     public void doToEachCell(Consumer<Cell> func) {
-        for(int i = 0; i < cells.length; i++){
-            for(int j = 0; j < cells[i].length; j++) {
-                func.accept(cells[i][j]);
-            }
-        }
-      }
+    Iterator<Cell> it = iterator();
+
+    while(it.hasNext()){
+        func.accept(it.next());
+    }
+
+
+
+    // for(Cell[] row:cells){
+    //     for(Cell cell:row){
+    //       func.accept(cell);
+    //     }
+    // }
+}
 
     public void paintOverlay(Graphics g, List<Cell> cells, Color color) {
         g.setColor(color);
@@ -102,6 +106,10 @@ class Grid {
             inRadius.addAll(getRadius(c, size - 1));
         }
         return new ArrayList<Cell>(inRadius);
+    }
+
+    public Iterator<Cell> iterator(){
+        return new GridIterator(cells);
     }
 }
 
