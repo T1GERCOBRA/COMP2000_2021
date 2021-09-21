@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 class Grid {
   Cell[][] cells = new Cell[20][20];
+  
   private static Random rand = new Random();
 
   public Grid() {
