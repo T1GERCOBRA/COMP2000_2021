@@ -1,4 +1,4 @@
-abstract class Landscape extends Cell {
+public class Landscape extends Cell {
     protected int height;
     protected float shade;
   
