@@ -23,7 +23,11 @@ class Grid {
     distribution = IntStream.rangeClosed(0, 20 * 20 - 1).boxed().collect(Collectors.toList());
     int current;
     int index;
-
+    for (int i = 0; i < cells.length; i++) {
+      for (int j = 0; j < cells[i].length; j++) {
+        cells[i][j] = new Cell(colToLabel(i), j, 10+35*i, 10+35*j);
+    }
+  }
   }
 
   private char colToLabel(int col) {
