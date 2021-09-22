@@ -1,3 +1,4 @@
+   
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +40,17 @@ class StageReader {
             String item = itemMatcher.group(1);
             float redness;
             int elevation;
-          
-               if (itemMatcher.group(3).equals(" ")) {
+            if (itemMatcher.group(2) == null) {
+              if (item.equals("building")) {
+               
+              } else {
+                System.out.println("error: no such cell type " + item);
+              }
+            } else {
+              if (itemMatcher.group(3).equals(",")) {
+                elevation = Integer.parseInt(itemMatcher.group(4));
+               
+              } else if (itemMatcher.group(3).equals(" ")) {
                 if (itemMatcher.group(4).equals("blue")) {
                   redness = 0.0f;
                 } else if (itemMatcher.group(4).equals("red")) {
@@ -61,9 +71,11 @@ class StageReader {
                 }
               }
             }
-          } 
+          } else {
+            System.out.println("error: unrecognised value " + value);
+          }
         }
-      
+      }
     } catch (IOException e) {
       System.out.println("catastrophic");
       // Start with an empty stage if we cannot open the stage file.
