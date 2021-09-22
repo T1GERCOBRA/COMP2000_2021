@@ -1,4 +1,3 @@
-   
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,14 +41,25 @@ class StageReader {
             int elevation;
             if (itemMatcher.group(2) == null) {
               if (item.equals("building")) {
-               
+                stage.grid.replaceCell(c, new Building(c.col, c.row, c.x, c.y));
               } else {
                 System.out.println("error: no such cell type " + item);
               }
             } else {
               if (itemMatcher.group(3).equals(",")) {
                 elevation = Integer.parseInt(itemMatcher.group(4));
-               
+                if (item.equals("road")) {
+                  stage.grid.replaceCell(c, new Road(c.col, c.row, c.x, c.y, elevation));
+                } else if (item.equals("water")) {
+                  stage.grid.replaceCell(c, new Water(c.col, c.row, c.x, c.y, elevation));
+                } else if (item.equals("grass")) {
+                  stage.grid.replaceCell(c, new Grass(c.col, c.row, c.x, c.y, elevation));
+                } else if (item.equals("mountain")) {
+                  stage.grid.replaceCell(c, new Mountain(c.col, c.row, c.x, c.y, elevation));
+                } else {
+                  System.out.println("error: " + value + ", no such cell type " + item);
+                  break;
+                }
               } else if (itemMatcher.group(3).equals(" ")) {
                 if (itemMatcher.group(4).equals("blue")) {
                   redness = 0.0f;
