@@ -1,3 +1,5 @@
+//ID: 45911355  Name: Thien Tran
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -5,67 +7,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 class Grid {
-  Cell[][] cells = new Cell[20][20];
-  private static Random rand = new Random();
+  
+  Cell[][] cellArray; //contains the results of RandomCell
+  CellFactory cells = new RandomCell(); //instance that calls for RandomCell
 
   public Grid() {
-    int elevation;
-    // The grid is 20x20=400 cells
-    // Create a list of integers numbered 0 through 399
-    List<Integer> distribution = new ArrayList<Integer>();
-    distribution = IntStream.rangeClosed(0, 20 * 20 - 1).boxed().collect(Collectors.toList());
-    int current;
-    int index;
-    for (int i = 0; i < cells.length; i++) {
-      for (int j = 0; j < cells[i].length; j++) {
-        // altitude vary over the following range:
-        // -500 <= elevation <= 6000
-        // this means that there are 6501 possible
-        // values including zero
-        elevation = rand.nextInt(6501) - 500;
-        // grab a random element from our list
-        // use the element's value to determine
-        // which cell type to instantiate
-        // and then remove that element from the list
-        // so that there are no repeats
-        index = rand.nextInt(distribution.size());
-        current = distribution.get(index);
-        distribution.remove(index);
-        char c = colToLabel(i);
-        int x = 10 + 35 * i;
-        int y = 10 + 35 * j;
-        //  Road: 10% of 400 = 40
-        if (current < 40) {
-          cells[i][j] = new Road(c, j, x, y, elevation);
-        }
-        // Water: 20% of 400 = 80
-        if (current >= 40 && current < 120) {
-          cells[i][j] = new Water(c, j, x, y, elevation);
-        }
-        // Grass: 40% of 400 = 160
-        if (current >= 120 && current < 280) {
-          cells[i][j] = new Grass(c, j, x, y, elevation);
-        }
-        // Mountain: 25% of 400 = 100
-        if (current >= 280 && current < 380) {
-          cells[i][j] = new Mountain(c, j, x, y, elevation);
-        }
-        // Buildings: 5% of 400 = 20
-        if (current >= 380 && current < 400) {
-          cells[i][j] = new Building(c, j, x, y);
-        }
-      }
-    }
+   
+    cellArray = cells.randomCell(20, 20); //now cellArray contains 20x20 random Cells
+
   }
 
-  private char colToLabel(int col) {
+  public static char colToLabel(int col) {
     return (char) (col + 65);
   }
 
@@ -78,8 +35,8 @@ class Grid {
   }
 
   private Optional<Cell> cellAtColRow(int c, int r) {
-    if (c >= 0 && c < cells.length && r >= 0 && r < cells[c].length) {
-      return Optional.of(cells[c][r]);
+    if (c >= 0 && c < cellArray.length && r >= 0 && r < cellArray[c].length) {
+      return Optional.of(cellArray[c][r]);
     } else {
       return Optional.empty();
     }
@@ -90,10 +47,10 @@ class Grid {
   }
 
   public Optional<Cell> cellAtPoint(Point p) {
-    for (int i = 0; i < cells.length; i++) {
-      for (int j = 0; j < cells[i].length; j++) {
-        if (cells[i][j].contains(p)) {
-          return Optional.of(cells[i][j]);
+    for (int i = 0; i < cellArray.length; i++) {
+      for (int j = 0; j < cellArray[i].length; j++) {
+        if (cellArray[i][j].contains(p)) {
+          return Optional.of(cellArray[i][j]);
         }
       }
     }
@@ -113,7 +70,7 @@ class Grid {
   }
 
   public void replaceCell(Cell old, Cell replacement) {
-    cells[labelToCol(old.col)][old.row] = replacement;
+    cellArray[labelToCol(old.col)][old.row] = replacement;
   }
 
   /**
@@ -123,9 +80,9 @@ class Grid {
    * @param func The `Cell` to `void` function to apply at each spot.
    */
   public void doToEachCell(Consumer<Cell> func) {
-    for (int i = 0; i < cells.length; i++) {
-      for (int j = 0; j < cells[i].length; j++) {
-        func.accept(cells[i][j]);
+    for (int i = 0; i < cellArray.length; i++) {
+      for (int j = 0; j < cellArray[i].length; j++) {
+        func.accept(cellArray[i][j]);
       }
     }
   }
@@ -170,9 +127,9 @@ class Grid {
 
   public String toString() {
     String retval = new String();
-    for (int i = 0; i < cells.length; i++) {
-      for (int j = 0; j < cells[i].length; j++) {
-        retval = retval + cells[i][j];
+    for (int i = 0; i < cellArray.length; i++) {
+      for (int j = 0; j < cellArray[i].length; j++) {
+        retval = retval + cellArray[i][j];
       }
     }
     return retval;

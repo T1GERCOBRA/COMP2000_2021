@@ -1,3 +1,5 @@
+//ID: 45911355  Name: Thien Tran
+
 import java.awt.Color;
 
 class Water extends Landscape {

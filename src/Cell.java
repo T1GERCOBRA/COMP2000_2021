@@ -1,3 +1,5 @@
+//ID: 45911355  Name: Thien Tran
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -6,14 +8,16 @@ import java.awt.Rectangle;
 class Cell extends Rectangle {
   private static int size = 35;
   protected String description;
-  protected Color color;
+  public Color color;
   protected char col;
   protected int row;
+
 
   public Cell(char inCol, int inRow, int inX, int inY) {
     super(inX, inY, size, size);
     col = inCol;
     row = inRow;
+
   }
 
   void paint(Graphics g, Point mousePos) {
@@ -47,4 +51,5 @@ class Cell extends Rectangle {
   public String toString() {
     return Character.toString(col) + Integer.toString(row) + ":" + description;
   }
+
 }

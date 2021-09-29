@@ -1,5 +1,6 @@
-import java.util.List;
+//ID: 45911355  Name: Thien Tran
 
+import java.util.List;
 class LeftMostMove implements MoveStrategy {
   @Override
   public Cell chooseNextLoc(List<Cell> possibleLocs) {
