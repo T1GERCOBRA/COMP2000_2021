@@ -4,17 +4,13 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-
 public class Stage {
     Grid grid;
     List<Actor> actors;
     List<Cell> cellOverlay;
     Optional<Actor> actorInAction;
-
     enum State {ChoosingActor, SelectingNewLocation, CPUMoving}
     State currentState;
-
     public Stage() {
         grid = new Grid();
         actors = new ArrayList<Actor>();
@@ -22,7 +18,6 @@ public class Stage {
         actorInAction = Optional.empty();
         currentState = State.ChoosingActor;
     }
-
     public void paint(Graphics g, Point mouseLoc) {
         // do we have AI moves to make
         if (currentState == State.CPUMoving) {
@@ -38,20 +33,16 @@ public class Stage {
                 a.turns = 1;
             }
         }
-
         grid.paint(g, mouseLoc);
         grid.paintOverlay(g, cellOverlay, new Color(0f, 0f, 1f, 0.5f));
-
         for(Actor a: actors) {
             a.paint(g);
         }
-
         // where to draw text in the information area
         final int hTab = 10;
         final int blockVT = 35;
         final int margin = 21*blockVT;
         int yLoc = 20;
-
         // state display
         g.setColor(Color.DARK_GRAY);
         g.drawString(currentState.toString(), margin, yLoc);
@@ -60,11 +51,9 @@ public class Stage {
         if(underMouse.isPresent()) {
             Cell hoverCell = underMouse.get();
             g.setColor(Color.DARK_GRAY);
-            
-            String coord = String.valueOf(hoverCell.col) + String.valueOf(hoverCell.col);
+            String coord = String.valueOf(hoverCell.col) + String.valueOf(hoverCell.row);
             g.drawString(coord, margin, yLoc);
         }
-
         // agent display
         final int vTab = 15;
         final int labelIndent = margin + hTab;
@@ -79,7 +68,11 @@ public class Stage {
             g.drawString("redness:", labelIndent, yLoc+2*vTab);
             g.drawString(Float.toString(a.redness), valueIndent, yLoc+2*vTab);
         }
-    }
+    
+        yLoc = yLoc + 3*blockVT;
+        Motif torch = new Motif("images/torch.png");
+        torch.draw(g, labelIndent, yLoc, Color.YELLOW);
+      }
 
     public List<Cell> getClearRadius(Cell from, int size) {
         List<Cell> init = grid.getRadius(from, size);
@@ -88,7 +81,6 @@ public class Stage {
         }
         return init;
     }
-
     public void mouseClicked(int x, int y ){
         switch (currentState) {
             case ChoosingActor:
@@ -129,6 +121,5 @@ public class Stage {
                 System.out.println(currentState);
                 break;
         }
-
     }
 }

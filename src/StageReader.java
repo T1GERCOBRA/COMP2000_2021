@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 class StageReader {
     public static Stage readStage(String path) {
         Stage stage = new Stage();
@@ -37,8 +36,11 @@ class StageReader {
                         stage.actors.add(new Boat(c, 1.0f));
                     } else if (value.equals("boat blue")) {
                         stage.actors.add(new Boat(c, 0.0f));
+                    } else if (value.equals("horse red")) {
+                        stage.actors.add(new Horse(c, 1.0f));
+                    } else if (value.equals("horse blue")) {
+                        stage.actors.add(new Horse(c, 0.0f));
                     }
-                    
                 }
             }
         } catch (IOException e) {

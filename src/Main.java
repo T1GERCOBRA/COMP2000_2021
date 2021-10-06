@@ -1,5 +1,3 @@
-
-
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,15 +10,13 @@ import java.time.Instant;
 class Main extends JFrame {
     
     class App extends JPanel implements MouseListener {
-
+        
         Stage stage;
 
         public App() {
             setPreferredSize(new Dimension(1024, 720));
-            //stage = new Stage();
             this.addMouseListener(this);
             stage = StageReader.readStage("data/stage1.rvb");
-           
         }
 
         @Override
@@ -50,6 +46,7 @@ class Main extends JFrame {
         Main window = new Main();
         window.run();
     }
+
     private Main() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         App canvas = new App();
@@ -73,4 +70,4 @@ class Main extends JFrame {
             }
         }
     }
-} 
+}

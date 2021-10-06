@@ -20,13 +20,12 @@ class Cell extends Rectangle {
         } else {
             g.setColor(Color.WHITE);
         }
-        g.fillRect(x,y,size,size);
+        g.fillRect(x, y, size, size);
         g.setColor(Color.BLACK);
-        g.drawRect(x,y,size,size);
+        g.drawRect(x, y, size, size);
     }
 
     @Override
-
     public boolean contains(Point p) {
         if (p != null) {
             return(super.contains(p));
@@ -34,6 +33,7 @@ class Cell extends Rectangle {
             return false;
         }
     }
+
     public int leftOfComparison(Cell c){
         return Character.compare(col, c.col);
     }

@@ -4,7 +4,6 @@ import java.awt.Polygon;
 import java.util.List;
 
 public abstract class Actor {
-    Color color;
     Cell loc;
     List<Polygon> display;
     float redness;
@@ -20,6 +19,32 @@ public abstract class Actor {
             g.drawPolygon(p);
         }
     }
+
+    private void animate(Graphics g){
+        AnimationBeat instance = AnimationBeat.instance();
+        long off = offset(instance.phaseCompletion());
+        int backup_x = loc.x;
+        int backup_y = loc.y;
+
+        switch(instance.inPhase()){
+            case 'a':loc.y+=off;
+            break;
+            case 'b': loc.x-=off;
+            break;
+            case 'c': loc.x+=off;
+        }
+
+        setPoly();
+
+        loc.x = backup_x;
+        loc.y = backup_y;
+    }
+
+    private long offset(long p){
+        long result = p<50? p/2 : 50 - p/2;
+        return result;
+    }
+
     protected abstract void setPoly();
 
     public boolean isTeamRed() {

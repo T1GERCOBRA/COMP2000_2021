@@ -3,13 +3,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-class Grid {
+class Grid implements Iterable<Cell> {
     Cell[][] cells = new Cell[20][20];
 
     public Grid() {
@@ -29,17 +28,8 @@ class Grid {
     }
 
     public void paint(Graphics g, Point mousePos) {
-
-
-        doToEachCell(c->
-        
-        {c.paint(g, mousePos);
-        
-        });
-
-        }
-    
-
+        doToEachCell( (Cell c) -> c.paint(g, mousePos) );
+    }
 
     private Optional<Cell> cellAtColRow(int c, int r) {
         if(c >= 0 && c < cells.length && r >= 0 && r < cells[c].length) {
@@ -53,36 +43,25 @@ class Grid {
         return cellAtColRow(labelToCol(c), r);
     }
     public Optional<Cell> cellAtPoint(Point p) {
-        for(int i=0; i < cells.length; i++) {
-            for(int j=0; j < cells[i].length; j++) {
-                if(cells[i][j].contains(p)) {
-                    return Optional.of(cells[i][j]);
-                }
+        for(Cell c: this) {
+            if(c.contains(p)) {
+                return Optional.of(c);
             }
         }
         return Optional.empty();
     }
 
-     /**
+
+    /**
      * Takes a cell consumer (i.e. a function that has a single `Cell` argument and
      * returns `void`) and applies that consumer to each cell in the grid.
      * @param func The `Cell` to `void` function to apply at each spot.
      */
     public void doToEachCell(Consumer<Cell> func) {
-    Iterator<Cell> it = iterator();
-
-    while(it.hasNext()){
-        func.accept(it.next());
+        for(Cell c: this) {
+            func.accept(c);
+        }
     }
-
-
-
-    // for(Cell[] row:cells){
-    //     for(Cell cell:row){
-    //       func.accept(cell);
-    //     }
-    // }
-}
 
     public void paintOverlay(Graphics g, List<Cell> cells, Color color) {
         g.setColor(color);
@@ -108,8 +87,8 @@ class Grid {
         return new ArrayList<Cell>(inRadius);
     }
 
-    public Iterator<Cell> iterator(){
-        return new GridIterator(cells);
+    @Override
+    public CellIterator iterator() {
+        return new CellIterator(cells);
     }
 }
-

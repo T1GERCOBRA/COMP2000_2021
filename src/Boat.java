@@ -1,11 +1,9 @@
-import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Boat extends Actor {
     public Boat(Cell inLoc, float inRedness) {
         setLocation(inLoc);
-        color = Color.ORANGE;
         redness = inRedness;
         turns = 1;
         moves = 1;
